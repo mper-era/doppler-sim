@@ -9,14 +9,10 @@ files = ["far", "near", "approach", "leave"]
 files = ["Audio2/" + file + ".wav" for file in files]
 colors = ["#2e7eff", "#29ff65", "#ff2ed5", "#ffca29"]
 
-for i in files:
-    n, sampleObj = wavfile.read(i)
-    globalAmpLength = len(sampleObj)
-    globalFreqPowerLength = len(np.abs(rfft(sampleObj)))
-    audioTimeScale = 5000
-    print(globalAmpLength)
-    print(globalFreqPowerLength)
-    print("---")
+n, sampleObj = wavfile.read(files[0])
+globalAmpLength = len(sampleObj)
+globalFreqPowerLength = len(np.abs(rfft(sampleObj)))
+audioTimeScale = 5000
 
 def getDataFromFile(audioFile):
 
@@ -64,16 +60,16 @@ plt.xlabel("Time (ms)")
 plt.ylabel("Amplitude")
 
 plt.subplot(3, 1, 2)
-plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[1]))[:len(far[1])], getDataFromFile(files[3])[0][1], color=colors[0], alpha=0.5)
-plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[1]))[:len(far[1])], getDataFromFile(files[4])[0][1], color=colors[1], alpha=0.5)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[1]))[:len(far[1])], getDataFromFile(files[0])[0][1], color=colors[0], alpha=0.5)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[1]))[:len(far[1])], getDataFromFile(files[1])[0][1], color=colors[1], alpha=0.5)
 plt.xlabel("Time (ms)")
-plt.ylabel("Frequency")
+plt.ylabel("Frequency (kHz)")
 
 plt.subplot(3, 1, 3)
 plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[2]))[:len(far[2])], far[2], color=colors[0], alpha=0.5)
 plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[2]))[:len(far[2])], near[2], color=colors[1], alpha=0.5)
 plt.xlabel("Time (ms)")
-plt.ylabel("Power")
+plt.ylabel("Power (dB)")
 
 plt.subplots_adjust(hspace = plotSpacing)
 
@@ -87,8 +83,8 @@ plt.xlabel("Time (ms)")
 plt.ylabel("Amplitude")
 
 plt.subplot(3, 1, 2)
-plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[1]))[:len(approach[1])], getDataFromFile(files[5])[0][1], color=colors[2], alpha=0.5)
-plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[1]))[:len(approach[1])], getDataFromFile(files[6])[0][1], color=colors[3], alpha=0.5)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[1]))[:len(approach[1])], getDataFromFile(files[2])[0][1], color=colors[2], alpha=0.5)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[1]))[:len(approach[1])], getDataFromFile(files[3])[0][1], color=colors[3], alpha=0.5)
 plt.xlabel("Time (ms)")
 plt.ylabel("Frequency")
 
@@ -110,14 +106,37 @@ plt.xlabel("Time (ms)")
 plt.ylabel("Amplitude")
 
 plt.subplot(3, 1, 2)
-plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(near[1]))[:len(near[1])], getDataFromFile(files[4])[0][1], color=colors[0], alpha=0.5)
-plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(near[1]))[:len(near[1])], getDataFromFile(files[6])[0][1], color=colors[3], alpha=0.5)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(near[1]))[:len(near[1])], getDataFromFile(files[1])[0][1], color=colors[0], alpha=0.5)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(near[1]))[:len(near[1])], getDataFromFile(files[3])[0][1], color=colors[3], alpha=0.5)
 plt.xlabel("Time (ms)")
 plt.ylabel("Frequency")
 
 plt.subplot(3, 1, 3)
 plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(near[2]))[:len(near[2])], near[2], color=colors[0], alpha=0.5)
 plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(near[2]))[:len(near[2])], leave[2], color=colors[3], alpha=0.5)
+plt.xlabel("Time (ms)")
+plt.ylabel("Power")
+
+plt.subplots_adjust(hspace = plotSpacing)
+
+f4 = plt.figure("Approaching (Pink) VS Far (Green) Comparison")
+f4.suptitle("Approaching (Pink) VS Far (Green) Comparison")
+
+plt.subplot(3, 1, 1)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[0]))[:len(approach[0])], approach[0], color=colors[2], alpha=0.5)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[0]))[:len(approach[0])], far[0], color=colors[1], alpha=0.5)
+plt.xlabel("Time (ms)")
+plt.ylabel("Amplitude")
+
+plt.subplot(3, 1, 2)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[1]))[:len(approach[1])], getDataFromFile(files[2])[0][1], color=colors[2], alpha=0.5)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[1]))[:len(approach[1])], getDataFromFile(files[0])[0][1], color=colors[1], alpha=0.5)
+plt.xlabel("Time (ms)")
+plt.ylabel("Frequency")
+
+plt.subplot(3, 1, 3)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[2]))[:len(approach[2])], approach[2], color=colors[2], alpha=0.5)
+plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(approach[2]))[:len(approach[2])], far[2], color=colors[1], alpha=0.5)
 plt.xlabel("Time (ms)")
 plt.ylabel("Power")
 

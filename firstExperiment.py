@@ -68,13 +68,13 @@ plt.subplot(3, 1, 2)
 plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[1]))[:len(far[1])], getDataFromFile(files[3])[0][1], color=colors[0], alpha=0.5)
 plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[1]))[:len(far[1])], getDataFromFile(files[4])[0][1], color=colors[1], alpha=0.5)
 plt.xlabel("Time (ms)")
-plt.ylabel("Frequency")
+plt.ylabel("Frequency (kHz)")
 
 plt.subplot(3, 1, 3)
 plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[2]))[:len(far[2])], far[2], color=colors[0], alpha=0.5)
 plt.plot(np.arange(0, audioTimeScale, audioTimeScale/len(far[2]))[:len(far[2])], near[2], color=colors[1], alpha=0.5)
 plt.xlabel("Time (ms)")
-plt.ylabel("Power")
+plt.ylabel("Power (dB)")
 
 plt.subplots_adjust(hspace = plotSpacing)
 
